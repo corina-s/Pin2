@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
-
+  root 'static#index'
   namespace :v1, defaults: { format: 'json'} do
     get 'things', to: 'things#index'
   end
