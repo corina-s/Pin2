@@ -27,6 +27,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 gem 'webpacker', '~> 5.x'
+gem 'react-rails'
 gem 'devise'
 
 group :development, :test do
