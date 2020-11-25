@@ -6,6 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import HelloWorld from '../components/HelloWorld'
+import App from '../components/App'
 // const Hello = props => (
 //   <div>Hello {props.name}!</div>
 // )
@@ -20,7 +21,7 @@ import HelloWorld from '../components/HelloWorld'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <HelloWorld greeting="Hello" />,
+    <App />,
     document.body.appendChild(document.createElement('div')),
   )
 })
