@@ -4,24 +4,19 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import HelloWorld from '../components/HelloWorld'
 import App from '../components/App'
-// const Hello = props => (
-//   <div>Hello {props.name}!</div>
-// )
+import configureStore from "../store/store";
 
-// Hello.defaultProps = {
-//   name: 'David'
-// }
-
-// Hello.propTypes = {
-//   name: PropTypes.string
-// }
-
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <App />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+document.addEventListener("DOMContentLoaded", () => {
+    let store;
+    // if (window.currentUser) {
+    //     const preloadedState = { session: { id: window.currentUser.id }, entities: {users: {[window.currentUser.id]: window.currentUser}} };
+    //     store = configureStore(preloadedState);
+    //     delete window.currentUser;
+    // } else {
+        store = configureStore();
+    // }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App store={store}/>, root);
+    window.getState = store.getState;
+});
