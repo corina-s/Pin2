@@ -12,3 +12,20 @@ User.destroy_all
 
 p "seeding data"
 
+u3 = User.create!(
+  username: 'guest',
+  email: 'g@g.com',
+  password: 'password'
+)
+
+u1 = User.create!(
+  username: 'Nora',
+  email: 'n@n.com',
+  password: 'nora123'
+)
+
+u2 = User.create!(
+  username: 'Ria',
+  email: 'r@r.com',
+  password: 'ria123'
+)
