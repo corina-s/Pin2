@@ -12,26 +12,32 @@ User.destroy_all
 
 p "seeding data"
 
-u3 = User.create!(
+u3 = User.new(
   username: 'guest',
   email: 'g@g.com',
   password: 'password',
   provider: 'email',
   uid: 'g@g.com'
 )
+u3.skip_confirmation!
+u3.save!
 
-u1 = User.create!(
+u1 = User.new(
   username: 'Nora',
   email: 'n@n.com',
   password: 'nora123',
   provider: 'email',
   uid: 'n@n.com'
 )
+u1.skip_confirmation!
+u1.save!
 
-u2 = User.create!(
+u2 = User.new(
   username: 'Ria',
   email: 'r@r.com',
   password: 'ria123',
   provider: 'email',
   uid: 'r@r.com'
 )
+u2.skip_confirmation!
+u2.save!
