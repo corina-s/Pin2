@@ -33,9 +33,15 @@ export const signup = user => dispatch => (
 );
 
 export const login = user => dispatch => (
-    APIUtil.login(user).then(user => (
-        dispatch(receiveCurrentUser(user))
-    ), err => (
+    APIUtil.login(user).then((data, status, xhr) => {
+        const accessToken = xhr.getResponseHeader("access-token");
+        const client = xhr.getResponseHeader("client");
+        const uid = xhr.getResponseHeader("uid");
+        const expiry = xhr.getResponseHeader("expiry");
+        const session = {accessToken, client, uid, expiry}
+        data.sessionData = session
+        dispatch(receiveCurrentUser(data))
+    }, err => (
             dispatch(receiveErrors(err.responseJSON))
     ))
 );
