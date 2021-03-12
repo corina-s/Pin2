@@ -1,7 +1,7 @@
 export const login = user => (
     $.ajax({
         method: 'POST',
-        url: '/users/sign_in',
+        url: '/auth/sign_in',
         data: { user } 
     })
 );
@@ -9,7 +9,7 @@ export const login = user => (
 export const signup = user => (
     $.ajax({
         method: 'POST',
-        url: '/users/sign_up',
+        url: '/auth/sign_up',
         data: { user }
     })
 );
@@ -17,6 +17,6 @@ export const signup = user => (
 export const logout = ()=> (
     $.ajax({
         method: 'DELETE',
-        url: 'users/sign_out',
+        url: 'auth/sign_out',
     })
 )
