@@ -1,58 +1,64 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-
-import FormInput from '../form-input/form-input.component';
-
+import { connect } from 'react-redux'
+import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component';
-// import { signUpStart } from '../../redux/user/user.actions';
 
-// import {auth, createUserProfileDocument} from '../../firebase/firebase.utils';
+import {signup} from '../../redux/session/session.actions'
+// import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions'
 
 import './sign-up.styles.scss';
 
-const SignUp = ({ signUpStart}) => {
-    
-    const [userCredentials, setCredentials] = useState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    });
-    const {displayName, email, password, confirmPassword} = userCredentials;
-    
-    const handleSubmit = async event =>{
-        event.preventDefault()
-        if (password !== confirmPassword){
-            alert("passwords don't match");
-            return
-        }
-        signUpStart({displayName, email, password})
+class SignUp extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            username: '',
+            email: '',
+            password: '',
+        };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    const handleChange = event =>{
-        const {name, value} = event.target;
-        setCredentials({...userCredentials, [name]: value})
+  
+    handleSubmit = async event => {
+        event.preventDefault();
+        
+        const user = Object.assign({}, this.state);
+    
+        this.props.signup(user);
+       
     }
 
-    return (
-        <div className='sign-up'>
-            <h2 className='title'>
+    handleChange = event => {
+        const {value, name} = event.target;
+        this.setState({ [name]: value})
+    }
+
+    render(){
+        const {username, email, password} = this.state
+        console.log('sign up')
+        return(
+            <div className='sign-up'>
+                <h1>SIGNUP PAGE</h1>
+                <h2 className='title'>
                 I do not have an account
-            </h2>
-            <span> Sign up with your email and password</span>
-            <form className='sign-up-form' onSubmit={handleSubmit}>
+                </h2>
+                <span> Sign up with your email and password</span>
+
+                <form className='sign-up-form' onSubmit={this.handleSubmit}>
                 <FormInput
                     type='text'
-                    name='displayName'
-                    value={displayName}
-                    onChange={handleChange}
-                    label='Display Name'
+                    name='username'
+                    value={username}
+                    onChange={this.handleChange}
+                    label='username'
                     required
                 />
                 <FormInput
                     type='email'
                     name='email'
                     value={email}
-                    onChange={handleChange}
+                    onChange={this.handleChange}
                     label='Email'
                     required
                 />
@@ -60,25 +66,30 @@ const SignUp = ({ signUpStart}) => {
                     type='password'
                     name='password'
                     value={password}
-                    onChange={handleChange}
+                    onChange={this.handleChange}
                     label='Password'
                     required
                 />
-                <FormInput
+                {/* <FormInput
                     type='password'
                     name='confirmPassword'
                     value={confirmPassword}
                     onChange={handleChange}
                     label='Confirm Password'
                     required
-                />
+                /> */}
                 <CustomButton type='submit'> SIGN UP </CustomButton>
             </form>
         </div>
-    )
 
+        )
+    }
+    
 }
 const mdtp = dispatch => ({
-    // signUpStart: (userCredentials)=>dispatch(signUpStart(userCredentials))
+    signup: (user) => dispatch(signup(user))
+    // googleSignInStart: ()=> dispatch(googleSignInStart()),
+    // emailSignInStart: (email, password)=>dispatch(emailSignInStart({email, password}))
 })
 export default connect(null, mdtp)(SignUp)
+
