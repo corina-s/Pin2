@@ -29,6 +29,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'webpacker', '~> 5.x'
 gem 'react-rails'
 gem 'devise'
+gem 'devise_token_auth'
+gem 'omniauth', '<2'
+gem 'rack-cors', :require => 'rack/cors'
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
