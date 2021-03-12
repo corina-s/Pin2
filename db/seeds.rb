@@ -15,17 +15,23 @@ p "seeding data"
 u3 = User.create!(
   username: 'guest',
   email: 'g@g.com',
-  password: 'password'
+  password: 'password',
+  provider: 'email',
+  uid: 'g@g.com'
 )
 
 u1 = User.create!(
   username: 'Nora',
   email: 'n@n.com',
-  password: 'nora123'
+  password: 'nora123',
+  provider: 'email',
+  uid: 'n@n.com'
 )
 
 u2 = User.create!(
   username: 'Ria',
   email: 'r@r.com',
-  password: 'ria123'
+  password: 'ria123',
+  provider: 'email',
+  uid: 'r@r.com'
 )
