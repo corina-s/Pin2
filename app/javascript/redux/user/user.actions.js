@@ -1,31 +1,51 @@
-export const RECEIVE_USERS = 'RECEIVE_USERS';
-export const RECEIVE_SINGLE_USER = 'RECEIVE_SINGLE_USER';
-export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS';
-import * as APIUtil from '../../utils/users';
 
-export const requestUsers = () => (dispatch) => {
-    return APIUtil.getUsers()
-        .then(users => { dispatch(receiveUsers(users)) });
-}
+import UserActionTypes from './user.types'
 
-export const requestSingleUser = (userId) => (dispatch) => {
-    return APIUtil.getSingleUser(userId).then(user => {
-        dispatch(receiveSingleUser(user));
-        return user;
-    }).fail(err => dispatch(receiveUserErrors(err.responseJSON)))
-}
+  
+  export const signInSuccess = user => ({
+    type: UserActionTypes.SIGN_IN_SUCCESS,
+    payload: user
+  });
+  
+  export const signInFailure = error => ({
+    type: UserActionTypes.SIGN_IN_FAILURE,
+    payload: error
+  });
+  
+  export const emailSignInStart = emailAndPassword => ({
+    type: UserActionTypes.EMAIL_SIGN_IN_START,
+    payload: emailAndPassword
+  });
+  
+  export const checkUserSession = () => ({
+    type: UserActionTypes.CHECK_USER_SESSION
+  });
+  
+  export const signOutStart = () => ({
+    type: UserActionTypes.SIGN_OUT_START
+  });
+  
+  export const signOutSuccess = () => ({
+    type: UserActionTypes.SIGN_OUT_SUCCESS
+  });
+  
+  export const signOutFailure = error => ({
+    type: UserActionTypes.SIGN_OUT_FAILURE,
+    payload: error
+  });
 
-const receiveUsers = users => ({
-    type: RECEIVE_USERS,
-    users
-});
-
-const receiveSingleUser = user => ({
-    type: RECEIVE_SINGLE_USER,
-    user
-});
-
-export const receiveUserErrors = errors => ({
-    type: RECEIVE_USER_ERRORS,
-    errors
-});
+  export const signUpStart = userCredentials => ({
+    type: UserActionTypes.SIGN_UP_START,
+    payload: userCredentials
+  });
+  
+  export const signUpSuccess = ({user, additionalData}) => ({
+    type: UserActionTypes.SIGN_UP_SUCCESS,
+    payload: {user, additionalData}
+  });
+  
+  export const signUpFailure = error => ({
+    type: UserActionTypes.SIGN_UP_FAILURE,
+    payload: error
+  });
+  

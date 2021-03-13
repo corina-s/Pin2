@@ -1,20 +1,35 @@
-import { RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER } from '../session/session.actions';
-import { RECEIVE_SINGLE_USER, RECEIVE_USERS} from './user.actions'
-const userReducer = (state = {}, action) => {
-    Object.freeze(state);
-    let user;
+import UserActionTypes from './user.types'
+
+const INITIAL_STATE = {
+    currentUser: null,
+    error: null
+}
+
+const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case RECEIVE_USERS:
-            return Object.assign({}, action.users);
-        case RECEIVE_SINGLE_USER:
-            user = action.user
-            return Object.assign({}, state, { [user.id]: user });
-        case RECEIVE_CURRENT_USER:
-            // debugger;
-            return Object.assign({}, state, { [action.user.data.id]: action.user.data });       
+        case UserActionTypes.SIGN_IN_SUCCESS:
+        case UserActionTypes.SIGN_UP_SUCCESS:
+            return {
+                ...state,
+                currentUser: action.payload,
+                error: null
+            };
+        case UserActionTypes.SIGN_OUT_SUCCESS:
+            return {
+                ...state,
+                currentUser: null,
+                error: null
+            };
+        case UserActionTypes.SIGN_IN_FAILURE:
+        case UserActionTypes.SIGN_UP_FAILURE:
+        case UserActionTypes.SIGN_OUT_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            };
         default:
             return state;
     }
-};
+}
 
 export default userReducer;

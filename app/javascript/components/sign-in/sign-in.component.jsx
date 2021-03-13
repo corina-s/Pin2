@@ -4,7 +4,7 @@ import FormInput from '../form-input/form-input.component'
 import CustomButton from '../custom-button/custom-button.component';
 
 import {login} from '../../redux/session/session.actions'
-// import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions'
+import { emailSignInStart } from '../../redux/user/user.actions'
 
 import './sign-in.styles.scss';
 
@@ -25,7 +25,7 @@ class SignIn extends React.Component {
         
         const user = Object.assign({}, this.state);
     
-        this.props.login(user);
+        this.props.emailSignInStart(user);
        
     }
     handleChange = event => {
@@ -80,7 +80,7 @@ class SignIn extends React.Component {
     
 }
 const mdtp = dispatch => ({
-    login: (user) => dispatch(login(user))
+    emailSignInStart: (user) => dispatch(emailSignInStart(user))
     // googleSignInStart: ()=> dispatch(googleSignInStart()),
     // emailSignInStart: (email, password)=>dispatch(emailSignInStart({email, password}))
 })
